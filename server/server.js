@@ -15,13 +15,23 @@ import  "./config/cloudnary.js"
 import updateRoute from "./routes/cartUpdated.js"
 import AddressRoutes from "./routes/AddresRoutes.js"
 import orderRoutes from "./routes/Orders.js"
-const allOrigies = ["http://localhost:5173/"]
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://fronted-2-5lr4.onrender.com"
+];
+
 app.use(cors({
-    origin:"https://fronted-2-5lr4.onrender.com/",
-    credentials:true
-}))
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    credentials: true
+}));
 app.use(cookieParser())
 app.use(checkAuth("token_user_login"))
 app.use(checksellerAuth("seller"))
