@@ -1,7 +1,6 @@
 import {BrowserRouter,Routes ,Route,  useLocation} from "react-router-dom"
 import './App.css'
 import Homepage from "./pages/Homepage"
-import Signinpage from "./pages/signin"
 import Navbar from "./components/navbar"
 import {Toaster} from "react-hot-toast"
 import Fotter from "./components/Fotter"
