@@ -4,8 +4,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-     "start": "node server.js",
-      "server":"nodemon server.js"
+    "start": "node server.js",
+    "server": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +22,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.16.0",
     "multer": "^2.0.1",
+    "socket.io": "^4.8.1",
     "stripe": "^18.2.1"
   }
 }

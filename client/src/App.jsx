@@ -18,10 +18,12 @@ import Addproduct from "./components/seller/addproduct"
 import ProductList from "./components/seller/ProductList"
 import Orders from "./components/seller/Orders"
 import Orderss from "./components/seller/Orders"
+import Chatcontaoner from "./pages/chatcontaoner"
+import Chatlayout from "./components/seller/chatlayout"
 function App() {
 
   const isSellerpath = useLocation().pathname.includes("seller")
-  const {shoUserLogin,setshoUserLogin,isSeller} = useAppContext()
+  const {shoUserLogin,setshoUserLogin,isSeller,user} = useAppContext()
   return (
     <div className="text-default min-h-screen text-gray-700 bg-white">
 <Toaster
@@ -56,10 +58,12 @@ function App() {
       <Route path="/cart" element={<Cart/>}/>
       <Route path="/Add-Adress" element={<Adress/>}/>
       <Route path="/My-orders" element={<Myorders/>}/>
+      <Route path="/chat" element={  <Chatcontaoner/>}/>
     <Route path="/seller" element={isSeller ? <SellerLayout/> :<Sellerlogin/>}>
      <Route index element={isSeller ? <Addproduct/> :null}/>
     <Route path="Product-list" element={<ProductList/>}/>
     <Route path="orders" element={<Orderss/>}/>
+    <Route path="chats" element={<Chatlayout/>}/>
     </Route>
     </Routes>
    

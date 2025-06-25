@@ -37,6 +37,7 @@ import potato_image_1 from "./potato_image_1.png";
 import potato_image_2 from "./potato_image_2.png";
 import potato_image_3 from "./potato_image_3.png";
 import potato_image_4 from "./potato_image_4.png";
+import chat from "./pando.png"
 import tomato_image from "./tomato_image.png";
 import carrot_image from "./carrot_image.png";
 import apple_image from "./apple_image.png";
@@ -99,7 +100,8 @@ export const assets = {
   bottom_banner_image_sm,
   add_address_iamge,
   box_icon,
-  primum
+  primum,
+  chat
 };
 
 export const categories = [

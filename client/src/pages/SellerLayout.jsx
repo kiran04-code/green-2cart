@@ -13,6 +13,7 @@ const hnadleLogout = async()=>{
         { name: "Add-Product", path: "/seller", icon: assets.add_icon },
         { name: "product list", path: "/seller/product-list", icon: assets.product_list_icon },
         { name: "orders", path: "/seller/orders", icon: assets.order_icon },
+        { name: "Messages", path: "/seller/chats", icon: assets.chat },
     ];
 
     return (

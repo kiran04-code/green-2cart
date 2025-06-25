@@ -3,7 +3,6 @@ import bcrypt from "bcrypt";
 import { createToken } from "../auth/jwt.js";
 export const hnadleUserSignup = async (req, res) => {
     const { firstName, email, password, } = req.body
-
     if(!email|| !password || !firstName){
          return res.json({
             success:false,
@@ -78,7 +77,7 @@ export const handleLogin = async (req, res) => {
     }).json({
       success: true,
       message: "Login successful!",
-      userData:req.body.user
+      userData:finduser
     });
 
   } catch (error) {
