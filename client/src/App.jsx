@@ -13,13 +13,12 @@ import Cart from "./pages/cart"
 import Adress from "./pages/Adress"
 import Myorders from "./pages/Myorders"
 import Sellerlogin from "./components/seller/sellerlogin"
-import SellerLayout from "./pages/SellerLayout"
+import SellerLayouts from "./pages/SellerLayout"
 import Addproduct from "./components/seller/addproduct"
 import ProductList from "./components/seller/ProductList"
-import Orders from "./components/seller/Orders"
 import Orderss from "./components/seller/Orders"
-import Chatcontaoner from "./pages/chatcontaoner"
-import Chatlayout from "./components/seller/chatlayout"
+import ChatContainers from "./pages/Chatcontaoner"
+import DashboardChat from "./components/seller/Chatlayout"
 function App() {
 
   const isSellerpath = useLocation().pathname.includes("seller")
@@ -58,12 +57,12 @@ function App() {
       <Route path="/cart" element={<Cart/>}/>
       <Route path="/Add-Adress" element={<Adress/>}/>
       <Route path="/My-orders" element={<Myorders/>}/>
-      <Route path="/chat" element={  <Chatcontaoner/>}/>
-    <Route path="/seller" element={isSeller ? <SellerLayout/> :<Sellerlogin/>}>
+      <Route path="/chat" element={  <ChatContainers/>}/>
+    <Route path="/seller" element={isSeller ? <SellerLayouts/> :<Sellerlogin/>}>
      <Route index element={isSeller ? <Addproduct/> :null}/>
     <Route path="Product-list" element={<ProductList/>}/>
     <Route path="orders" element={<Orderss/>}/>
-    <Route path="chats" element={<Chatlayout/>}/>
+    <Route path="chats" element={<DashboardChat/>}/>
     </Route>
     </Routes>
    

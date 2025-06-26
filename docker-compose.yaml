@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: ./client
+    ports:
+      - "5173:5173"
+    networks:
+      - mern
+    depends_on:
+      - backend
+
+  backend:
+    build: ./server
+    ports:
+      - "6003:6003"
+    networks:
+      - mern
+
+networks:
+  mern:
+    driver: bridge
+
