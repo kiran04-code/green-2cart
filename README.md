@@ -31,3 +31,24 @@ GreenCart integrates Stripe Checkout to allow users to securely pay for their gr
     Payment details and status are securely managed via Stripe.
 
 
+
+ Installation and Setup in your machine  without docker 
+
+  Clone the repository
+
+    git clone https://github.com/YOUR_USERNAME/greenCart.git
+
+  Start Server (Setup Backend )
+
+     cd server
+     npm install
+     npm start 
+
+  Start Clinet ( Setup Frontend (React + )
+  
+     cd client 
+     npm install 
+     npm run dev 
+     
+
+
