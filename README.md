@@ -1,72 +1,97 @@
-🛒 GreenCart - Grocery Web Application
+# 🛒 GreenCart - Grocery Web Application
 
-GreenCart is a modern full-stack grocery e-commerce application built using the MERN stack (MongoDB, Express.js, React, Node.js). It offers users a seamless grocery shopping experience with real-time chat and secure online payments.
-🚀 Live Features
+**GreenCart** is a modern full-stack grocery e-commerce application built using the **MERN stack** (MongoDB, Express.js, React, Node.js). It offers users a seamless grocery shopping experience with real-time chat and secure online payments.
 
-    🛍️ Browse and search fresh grocery products
+---
 
-    👨‍💻 User registration and login
+## 🚀 Live Features
 
-    🧺 Add to cart and place orders
+- 🛍️ Browse and search fresh grocery products  
+- 👨‍💻 User registration and login  
+- 🧺 Add to cart and place orders  
+- 💬 Real-time chat between users and shopkeepers using **Socket.IO**  
+- 💳 Online payments using **Stripe**  
+- 📦 Order tracking for users and shopkeepers  
+- 🛒 Shopkeeper dashboard to manage inventory and view orders  
 
-    💬 Real-time chat between users and shopkeepers using Socket.IO
+---
 
-    💳 Online payments using Stripe
+## 💳 Online Payment with Stripe
 
-    📦 Order tracking for users and shopkeepers
+GreenCart integrates **Stripe Checkout** to allow users to securely pay online.
 
-    🛒 Shopkeeper dashboard to manage inventory and view orders
+### How it works:
 
-💳 Online Payment with Stripe
+1. Users add items to their cart and proceed to checkout.  
+2. Stripe Checkout redirects to a secure payment page.  
+3. On success, a confirmation is shown and the order is saved.  
+4. Stripe manages all sensitive data securely.
 
-GreenCart integrates Stripe Checkout to allow users to securely pay for their groceries online. Payment is processed in real-time, and the order is recorded only after successful payment confirmation.
-⚙️ How It Works
+---
 
-    Users add items to their cart and proceed to checkout.
+## ⚙️ Installation & Setup (Without Docker)
 
-    Stripe Checkout is triggered, and the user is redirected to a secure Stripe-hosted page.
-
-    On success, a confirmation is shown and the order is saved in the database.
-
-    Payment details and status are securely managed via Stripe.
+### 🔧 Backend (Express + MongoDB)
 
 
+    git clone https://github.com/kiran04-code/green-2cart.git
 
- Installation and Setup in your machine  without docker 
+    cd server
+    npm install
+    npm start
+🎨 Frontend (React + Vite)
 
-  Clone the repository
+    cd client
+    npm install
+    npm run dev
 
-    git clone https://github.com/YOUR_USERNAME/greenCart.git
 
-  Start Server (Setup Backend )
+🐳 Docker + Docker Compose Setup
+    🚀 Using Docker Compose
 
-     cd server
-     npm install
-     npm start 
+     git clone https://github.com/kiran04-code/green-2cart.git
+   
+      cd green-2cart
+      docker-compose up --build
 
-  Start Clinet ( Setup Frontend (React + )
-  
-     cd client 
-     npm install 
-     npm run dev 
-     
-🐳 Docker + Docker Compose for containerization
+💡 To run in background:
 
-  Clone the repository
+        docker-compose up -d
+ 🛑 To stop the containers:
 
-    git clone https://github.com/YOUR_USERNAME/greenCart.git
+    docker-compose down
 
-  Using Docker Compose
+🐳 Run from Docker Hub (No Code Clone Needed)
 
-     docker-compose up --build
+GreenCart is available as pre-built Docker images:
 
- start the container in background 
+Service	Docker Image Link
 
-     docker-compose uo -d 
+🖥️ Frontend  
 
-     
+      greencart-kiran.dev-frontend
+ 🗄️ Backend
  
+      greencart-kiran.dev-backend
+      
+🔌 Run using Docker CLI
 
-    
-    
+🕸️ First, create a Docker network:
+
+     docker network create greencart-network
+
+🚀 Run Frontend:
+
+    docker run -it -p 5173:5173 --name=greencart-client --network=greencart-network 7774025744/greencart-kiran.dev-frontend
+
+ Access in browser: http://localhost:5173
+
+ 🚀 Run Backend:
+
+    docker run -it -p 6003:6003 --name=greencart-server --network=greencart-network 7774025744/greencart-kiran.dev-backend
+ Access in browser: http://localhost:6003
+ 
+🐳 © 2025 — @kiran.dev. All rights reserved.
+
+
 
