@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { SendHorizonal } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
 
-const ChatContainer = () => {
+const ChatContainers = () => {
     const { socket } = useAppContext();
     const [message, setMessage] = useState([]);
     const [rcmessage, setrcmessage] = useState([]);
@@ -74,4 +74,4 @@ const ChatContainer = () => {
     );
 };
 
-export default ChatContainer;
+export default ChatContainers;

@@ -2,7 +2,7 @@ import React from 'react'
 import { assets } from '../assets/assets';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
-const SellerLayout = () => {
+const SellerLayouts = () => {
 
   const {setIsSeller,sellerLogout} = useAppContext()
 const hnadleLogout = async()=>{
@@ -48,4 +48,4 @@ const hnadleLogout = async()=>{
     );
 };
 
-export default SellerLayout
+export default SellerLayouts
