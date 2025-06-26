@@ -50,5 +50,23 @@ GreenCart integrates Stripe Checkout to allow users to securely pay for their gr
      npm install 
      npm run dev 
      
+🐳 Docker + Docker Compose for containerization
 
+  Clone the repository
+
+    git clone https://github.com/YOUR_USERNAME/greenCart.git
+
+  Using Docker Compose
+
+     docker-compose up --build
+
+ start the container in background 
+
+     docker-compose uo -d 
+
+     
+ 
+
+    
+    
 
