@@ -1,21 +1,41 @@
 import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { createContext } from "react";
-import { dummyProducts } from "../assets/assets";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { io } from "socket.io-client"
+
 const AppContext = createContext(null)
+
 export const useAppContext = () => {
     return useContext(AppContext)
 }
 const AppContextProvider = ({ children }) => {
+    
+const socket =  io("http://localhost:6003")
+
+useEffect(() => {
+    const socketioConnection = () => {
+        console.log("userConnedted:", socket.id)
+    }
+    const socketiodisconnetd = () => {
+        console.log("disconnect:", socket.id)
+    }
+    socket.on("connect", socketioConnection)
+    socket.on("disconnect", socketiodisconnetd)
+
+    return () => {
+        socket.off("connect", socketioConnection)
+        socket.off("disconnect", socketiodisconnetd)
+    }
+}, [socket])
 
     const currancy = import.meta.env.VITE_CURRENCY;
     const navigate = useNavigate()
     const [user, setUser] = useState(null)
     const [isSeller, setIsSeller] = useState(false)
-      const [seltectedAdress,setSelectedAdress] = useState([])
+    const [seltectedAdress, setSelectedAdress] = useState([])
     const [shoUserLogin, setshoUserLogin] = useState(null)
     const [product, setProduct] = useState([])
     const [cartItems, setCartItems] = React.useState({});
@@ -26,9 +46,9 @@ const AppContextProvider = ({ children }) => {
 
     // ALL Authentication WORKS FROM SELLAER TO USER 
     const handleLogin = async (state, body) => {
+
         try {
             const { data } = await axios.post(`/api/${state}`, body, { withCredentials: true })
-            console.log(data)
             if (data.success) {
                 setUser(data.userData)
                 toast.success(data.message)
@@ -45,7 +65,7 @@ const AppContextProvider = ({ children }) => {
         try {
             const { data } = await axios.post("/api/GoogleLogin", body, { withCredentials: true })
             if (data.success) {
-                setUser(data.data)
+                setUser(data.userData)
                 toast.success(data.message)
             }
             else {
@@ -200,11 +220,11 @@ const AppContextProvider = ({ children }) => {
 
             } catch (error) {
                 console.log(error)
-                 toast.error(data.message)
+                toast.error(data.message)
             }
         }
 
-        if(user){
+        if (user) {
             cartData()
         }
     }, [cartItems])
@@ -238,7 +258,8 @@ const AppContextProvider = ({ children }) => {
         handleGoogleLogin,
         fetchProducts,
         axios,
-        
+        socket
+
 
     }
     return <AppContext.Provider value={value}>

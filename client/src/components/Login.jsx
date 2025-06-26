@@ -30,7 +30,7 @@ const Login = ({ setshoUserLogin }) => {
                 {state === "register" && (
                     <div className="w-full">
                         <p>Name</p>
-                        <input onChange={handlefromdata} placeholder="type here" name='name' className="border border-gray-200 rounded w-full p-2 mt-1 outline-[#4FBF8B]" type="text" required />
+                        <input onChange={handlefromdata} placeholder="type here" name='firstName' className="border border-gray-200 rounded w-full p-2 mt-1 outline-[#4FBF8B]" type="text" required />
                     </div>
                 )}
                 <div className="w-full ">

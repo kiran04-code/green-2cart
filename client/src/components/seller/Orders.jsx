@@ -22,7 +22,6 @@ const fetchOrders = async()=>{
 useEffect(()=>{
   fetchOrders()
 },[])
-console.log(orders)
     return (
         <div className="md:p-10 p-4 space-y-4">
             <h2 className="text-lg font-medium">Orders List</h2>
