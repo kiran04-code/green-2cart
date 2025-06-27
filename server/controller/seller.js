@@ -17,10 +17,10 @@ export const sellerLogin = async (req, res) => {
       const createSeller = await seller.create({ email, password });
       const token = createTokenforSeller(createSeller);
       res.cookie("seller", token,{
-         httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', // HTTPS only
-      sameSite: 'none', // or 'none' if cross-site
-      maxAge: 24 * 60 * 60 * 1000 // 1 day
+       httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+  maxAge: 1000 * 60 * 60 * 24
       }).json({
         success: true,
         message: "Account created & logged in as Seller",

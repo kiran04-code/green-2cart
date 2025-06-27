@@ -27,11 +27,10 @@ export const hnadleUserSignup = async (req, res) => {
 
     const token = createToken(createdUser)
     return res.cookie("token_user_login", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', // HTTPS only
-      sameSite: 'none', 
-      maxAge: 24 * 60 * 60 * 1000 // 1 day
-
+      hhttpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      maxAge: 1000 * 60 * 60 * 24
     }).json({
       success: true,
       message: "Account successfully created!",
@@ -73,10 +72,10 @@ export const handleLogin = async (req, res) => {
 
     // Send token in cookie
     return res.cookie("token_user_login", token, {
-     httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', // HTTPS only
-      sameSite: 'none', // or 'none' if cross-site
-      maxAge: 24 * 60 * 60 * 1000 // 1 day
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      maxAge: 1000 * 60 * 60 * 24
     }).json({
       success: true,
       message: "Login successful!",
@@ -102,9 +101,9 @@ export const handleLoginWithGoogle = async (req, res) => {
       return res
         .cookie("token_user_login", token, {
           httpOnly: true,
-          secure: process.env.NODE_ENV === 'production', // HTTPS only
-          sameSite: 'none', // or 'none' if cross-site
-          maxAge: 24 * 60 * 60 * 1000 // 1 day
+          secure: process.env.NODE_ENV === "production",
+          sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+          maxAge: 1000 * 60 * 60 * 24
         })
         .json({
           message: "Login successful!",
@@ -123,12 +122,12 @@ export const handleLoginWithGoogle = async (req, res) => {
 
       const token = createToken(newUser);
       return res
-        .cookie("token_user_login", token, { 
+        .cookie("token_user_login", token, {
           httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', // HTTPS only
-      sameSite: 'none', // or 'none' if cross-site
-      maxAge: 24 * 60 * 60 * 1000 // 1 day
-      })
+          secure: process.env.NODE_ENV === "production",
+          sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+          maxAge: 1000 * 60 * 60 * 24
+        })
         .json({
           message: "Account created and login successful!",
           success: true,
