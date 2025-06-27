@@ -29,7 +29,7 @@ export const hnadleUserSignup = async (req, res) => {
     return res.cookie("token_user_login", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production', // HTTPS only
-      sameSite: 'none', // or 'none' if cross-site
+      sameSite: 'none', 
       maxAge: 24 * 60 * 60 * 1000 // 1 day
 
     }).json({
@@ -73,7 +73,10 @@ export const handleLogin = async (req, res) => {
 
     // Send token in cookie
     return res.cookie("token_user_login", token, {
-      httpOnly: true,
+     httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', // HTTPS only
+      sameSite: 'none', // or 'none' if cross-site
+      maxAge: 24 * 60 * 60 * 1000 // 1 day
     }).json({
       success: true,
       message: "Login successful!",
@@ -120,7 +123,12 @@ export const handleLoginWithGoogle = async (req, res) => {
 
       const token = createToken(newUser);
       return res
-        .cookie("token_user_login", token, { httpOnly: true, secure: true })
+        .cookie("token_user_login", token, { 
+          httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', // HTTPS only
+      sameSite: 'none', // or 'none' if cross-site
+      maxAge: 24 * 60 * 60 * 1000 // 1 day
+      })
         .json({
           message: "Account created and login successful!",
           success: true,
@@ -161,12 +169,7 @@ export const authcheck = async () => {
 }
 export const logout = async (req, res) => {
   try {
-    res.clearCookie("token_user_login", {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', // HTTPS only
-      sameSite: 'none', // or 'none' if cross-site
-      maxAge: 24 * 60 * 60 * 1000 // 1 dayn
-    });
+    res.clearCookie("token_user_login");
 
     return res.json({
       success: true,

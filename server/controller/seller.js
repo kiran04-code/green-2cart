@@ -16,7 +16,12 @@ export const sellerLogin = async (req, res) => {
     } else {
       const createSeller = await seller.create({ email, password });
       const token = createTokenforSeller(createSeller);
-      res.cookie("seller", token).json({
+      res.cookie("seller", token,{
+         httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', // HTTPS only
+      sameSite: 'none', // or 'none' if cross-site
+      maxAge: 24 * 60 * 60 * 1000 // 1 day
+      }).json({
         success: true,
         message: "Account created & logged in as Seller",
         sellartData: createSeller.toObject()
@@ -45,11 +50,7 @@ export const isAuth = async(req,res)=>{
 }
 export const sellerLogout = async(req,res)=>{
  try {
-   res.clearCookie("seller", {
-    httpOnly: true,
-    secure: process.NODE_ENV ==="production"   ,    // only enable in production or HTTPS
-    sameSite: process.NODE_ENV ==="production" ?"none" :"strict"    // optional but adds CSRF protection
-  });
+   res.clearCookie("seller");
 
   return res.json({
     success: true,

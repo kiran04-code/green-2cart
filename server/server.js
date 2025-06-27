@@ -55,7 +55,7 @@ connectionwithDB(process.env.MONGODB_URL).then(()=>{
 // iniallization of socket.io
 const io = new Server(server,{
     cors:{
-    origin:"https://greencart-kiran-dev.onrender.com/",
+    origin:"https://greencart-kiran-dev.onrender.com    ",
      methods: ["GET", "POST"],
     credentials:true
     }
