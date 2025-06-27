@@ -16,11 +16,11 @@ export const sellerLogin = async (req, res) => {
     } else {
       const createSeller = await seller.create({ email, password });
       const token = createTokenforSeller(createSeller);
-      res.cookie("seller", token,{
-       httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-  maxAge: 1000 * 60 * 60 * 24
+      res.cookie("seller", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        maxAge: 1000 * 60 * 60 * 24
       }).json({
         success: true,
         message: "Account created & logged in as Seller",
@@ -35,28 +35,28 @@ export const sellerLogin = async (req, res) => {
   }
 };
 
-export const isAuth = async(req,res)=>{
+export const isAuth = async (req, res) => {
   try {
     const userid = req.seller
     const users = await seller.findById(userid).select("-password")
-    if(users){
-         return res.json({success:true,message:"seller found"})
+    if (users) {
+      return res.json({ success: true, message: "seller found" })
     }
-   return  res.json({success:false,message:"seller not found"})
+    return res.json({ success: false, message: "seller not found" })
   } catch (error) {
     console.log(error.message)
-    return res.json({success:false,message:error.message})
+    return res.json({ success: false, message: error.message })
   }
 }
-export const sellerLogout = async(req,res)=>{
- try {
-   res.clearCookie("seller");
+export const sellerLogout = async (req, res) => {
+  try {
+    res.clearCookie("seller");
 
-  return res.json({
-    success: true,
-    message: "Logout successful!"
-  });
- } catch (error) {
-  console.log(error)
- }
+    return res.json({
+      success: true,
+      message: "Logout successful!"
+    });
+  } catch (error) {
+    console.log(error)
+  }
 }

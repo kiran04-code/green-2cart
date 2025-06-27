@@ -27,10 +27,11 @@ export const hnadleUserSignup = async (req, res) => {
 
     const token = createToken(createdUser)
     return res.cookie("token_user_login", token, {
-      hhttpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-      maxAge: 1000 * 60 * 60 * 24
+      path: "/",
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: 1000 * 60 * 60 * 24, // ✅ 1 day
     }).json({
       success: true,
       message: "Account successfully created!",
@@ -72,10 +73,11 @@ export const handleLogin = async (req, res) => {
 
     // Send token in cookie
     return res.cookie("token_user_login", token, {
+      path: "/",
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-      maxAge: 1000 * 60 * 60 * 24
+      secure: true,
+      sameSite: "none",
+      maxAge: 1000 * 60 * 60 * 24, // ✅ 1 day
     }).json({
       success: true,
       message: "Login successful!",
@@ -100,10 +102,11 @@ export const handleLoginWithGoogle = async (req, res) => {
       const token = createToken(existingUser);
       return res
         .cookie("token_user_login", token, {
+          path: "/",
           httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
-          sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-          maxAge: 1000 * 60 * 60 * 24
+          secure: true,
+          sameSite: "none",
+          maxAge: 1000 * 60 * 60 * 24, // ✅ 1 day
         })
         .json({
           message: "Login successful!",
@@ -123,10 +126,11 @@ export const handleLoginWithGoogle = async (req, res) => {
       const token = createToken(newUser);
       return res
         .cookie("token_user_login", token, {
+          path: "/",
           httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
-          sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-          maxAge: 1000 * 60 * 60 * 24
+          secure: true,
+          sameSite: "none",
+          maxAge: 1000 * 60 * 60 * 24, // ✅ 1 day
         })
         .json({
           message: "Account created and login successful!",
