@@ -26,7 +26,7 @@ app.use(express.urlencoded({extended:true}))
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://fronted-2-5lr4.onrender.com"
+  "https://greencart-kiran-dev.onrender.com"
 ];
 
 app.use(cors({
@@ -55,7 +55,7 @@ connectionwithDB(process.env.MONGODB_URL).then(()=>{
 // iniallization of socket.io
 const io = new Server(server,{
     cors:{
-    origin:"http://localhost:5173",
+    origin:"https://greencart-kiran-dev.onrender.com/",
      methods: ["GET", "POST"],
     credentials:true
     }
