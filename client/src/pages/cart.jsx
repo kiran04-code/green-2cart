@@ -94,7 +94,7 @@ const amount = getCartTotalAmmount() + getCartTotalAmmount() * 2 / 100
                                 address: seltectedAdress._id,
                                 items: cartArrays.map(item => ({ product: item._id, quantity: item.quantity }))
                             };
-                         const {data} =   await axios.post("https://green-2cart.onrender.com/api/payment-success", payload);
+                         const {data} =   await axios.post("https://bakend02.onrender.com/api/payment-success", payload);
                          if(data.success){
                             toast.success(data.message)
                             navigate("/My-orders")

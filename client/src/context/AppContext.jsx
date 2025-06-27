@@ -13,7 +13,7 @@ export const useAppContext = () => {
 }
 const AppContextProvider = ({ children }) => {
     
-const socket =  io("http://localhost:6005")
+const socket =  io("https://bakend02.onrender.com")
 
 useEffect(() => {
     const socketioConnection = () => {
