@@ -50,18 +50,18 @@ const Cart = () => {
         }
     }
     const placeorder = async () => {
-         try {
-            if(!seltectedAdress){
+        try {
+            if (!seltectedAdress) {
                 toast.error("Please Slecte the  Address")
             }
             // place order with COD 
-            if(PayMentOption === "COD"){
+            if (PayMentOption === "COD") {
                 try {
-                    const {data} = await axios.post("/api/placeorders",{
-                        address:seltectedAdress._id,
-                        items:cartArrays.map(item=>({product:item._id ,quantity:item.quantity}))
-                    },{withCredentials:true})
-                    if(data.success){
+                    const { data } = await axios.post("/api/placeorders", {
+                        address: seltectedAdress._id,
+                        items: cartArrays.map(item => ({ product: item._id, quantity: item.quantity }))
+                    }, { withCredentials: true })
+                    if (data.success) {
                         setCartItems([])
                         toast.success(data.message)
                         navigate("/My-orders")
@@ -71,9 +71,52 @@ const Cart = () => {
                     console.log(error)
                 }
             }
-         } catch (error) {
-            
-         }
+            else {
+                try {
+                    const { data: key } = await axios("/api/getkey")
+                    console.log(key.key)
+                    const { data: { order } } = await axios.post("/api/paymentonline")
+                    const options = {
+                        key: key.key, // Replace with your Razorpay key_id
+                        amount: order.amount, // Amount is in paise
+                        currency: 'INR',
+                        name: 'kiran rathod',
+                        description: 'Test Transaction',
+                        order_id: order.id,
+                        handler: async function (response) {
+                            const { razorpay_payment_id, razorpay_order_id, razorpay_signature } = response;
+
+                            const payload = {
+                                razorpay_payment_id,
+                                razorpay_order_id,
+                                razorpay_signature,
+                                 userId:user._id,
+                                address: seltectedAdress._id,
+                                items: cartArrays.map(item => ({ product: item._id, quantity: item.quantity }))
+                            };
+                            await axios.post("http://localhost:6004/api/payment-success", payload);
+                        },
+                        prefill: {
+                            name: 'Gaurav Kumar',
+                            email: user.email,
+                            contact: '7774025744'
+                        },
+                        theme: {
+                            color: '#4FBF8B'
+                        }
+                    };
+                    const rzp = new window.Razorpay(options);
+                    rzp.open();
+                    ;
+                } catch (error) {
+
+                }
+            }
+
+
+        } catch (error) {
+
+        }
     }
     useEffect(() => {
         if (user) {

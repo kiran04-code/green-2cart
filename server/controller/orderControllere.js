@@ -33,6 +33,7 @@ const placeOrdersCODs = await Order.create({
   amount,
   paymentType: "COD"
 });
+console.log(placeOrdersCODs)
    return res.json({
         success:true ,placeOrdersCODs,message:"order placed SucessFull!"
     })
@@ -48,7 +49,14 @@ const placeOrdersCODs = await Order.create({
 export const getorderofuser = async(req,res)=>{
   try {
     const userId = req.user
-    const dataOrder  = await Order.find({userId ,$or:[{paymentType:"COD"},{isPaid:true}]}).populate("items.product").populate("address").populate("userId").sort({createdAt:-1})
+    const dataOrder  = await Order.find({
+  userId,
+  $or: [  
+    { paymentType: "COD" },
+    { paymentType: "Online" },
+    { isPaid: true }
+  ]
+}).populate("items.product").populate("address").populate("userId").sort({createdAt:-1})
     res.json({
       success:true,
       message:"getUserOrder!",
@@ -66,7 +74,13 @@ export const getorderofuser = async(req,res)=>{
 // order/admin/seller
 export const allorderData = async(req,res)=>{
  try {
-  const orders = await Order.find({$or:[{paymentType:"COD"},{isPaid:true}]}).populate("items.product").populate("address").sort({createAt:-1})
+  const orders = await Order.find({
+  $or: [
+    { paymentType: "COD" },
+    { paymentType: "Online" },
+    { isPaid: true }
+  ]
+}).populate("items.product").populate("address").sort({createAt:-1})
   return res.json({
     success:true,
     message:"get all orderds Data for Admin",
