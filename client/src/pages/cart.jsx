@@ -3,6 +3,7 @@ import { assets } from "../assets/assets"
 import { useAppContext } from "../context/AppContext"
 import { useNavigate } from "react-router-dom"
 import { dummyAddress } from "../assets/assets"
+
 import toast from "react-hot-toast";
 const Cart = () => {
 
@@ -31,7 +32,7 @@ const Cart = () => {
         }
     }, [getCart, cartItems, product])
 
-
+const amount = getCartTotalAmmount() + getCartTotalAmmount() * 2 / 100
     const handlegetAdress = async () => {
         try {
             const { data } = await axios.get("/api/Address/get", { withCredentials: true })
@@ -74,8 +75,7 @@ const Cart = () => {
             else {
                 try {
                     const { data: key } = await axios("/api/getkey")
-                    console.log(key.key)
-                    const { data: { order } } = await axios.post("/api/paymentonline")
+                    const { data: { order } } = await axios.post("/api/paymentonline",{amount})
                     const options = {
                         key: key.key, // Replace with your Razorpay key_id
                         amount: order.amount, // Amount is in paise
@@ -94,10 +94,14 @@ const Cart = () => {
                                 address: seltectedAdress._id,
                                 items: cartArrays.map(item => ({ product: item._id, quantity: item.quantity }))
                             };
-                            await axios.post("http://localhost:6004/api/payment-success", payload);
+                         const {data} =   await axios.post("https://green-2cart.onrender.com/api/payment-success", payload);
+                         if(data.success){
+                            toast.success(data.message)
+                            navigate("/My-orders")
+                         }
                         },
                         prefill: {
-                            name: 'Gaurav Kumar',
+                            name: user.firstName,
                             email: user.email,
                             contact: '7774025744'
                         },
@@ -109,13 +113,13 @@ const Cart = () => {
                     rzp.open();
                     ;
                 } catch (error) {
-
+                   console.log(error)
                 }
             }
 
 
         } catch (error) {
-
+        console.log(error)
         }
     }
     useEffect(() => {
@@ -227,6 +231,7 @@ const Cart = () => {
                             <span>Tax (2%)</span><span>₹{getCartTotalAmmount() * 2 / 100}</span>
                         </p>
                         <p className="flex justify-between text-lg font-medium mt-3">
+                        
                             <span>Total Amount:</span><span>₹{getCartTotalAmmount() + getCartTotalAmmount() * 2 / 100}</span>
                         </p>
                     </div>

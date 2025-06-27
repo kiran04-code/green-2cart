@@ -33,7 +33,6 @@ const placeOrdersCODs = await Order.create({
   amount,
   paymentType: "COD"
 });
-console.log(placeOrdersCODs)
    return res.json({
         success:true ,placeOrdersCODs,message:"order placed SucessFull!"
     })

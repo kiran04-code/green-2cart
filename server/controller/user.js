@@ -90,8 +90,7 @@ export const handleLogin = async (req, res) => {
 };
 
 export const handleLoginWithGoogle = async (req, res) => {
-    const { email, firstName } = req.body;
-
+    const { email, firtstName  } = req.body;
     try {
         const existingUser = await user.findOne({ email });
 
@@ -110,7 +109,7 @@ export const handleLoginWithGoogle = async (req, res) => {
 
             const newUser = await user.create({
                 email,
-                firstName,
+                firstName:firtstName,
                 password: hashedPassword
             });
 

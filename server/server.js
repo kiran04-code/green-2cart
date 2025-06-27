@@ -25,7 +25,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
 const allowedOrigins = [
-  "http://localhost:5174",
+  "http://localhost:5173",
   "https://fronted-2-5lr4.onrender.com"
 ];
 
@@ -55,16 +55,14 @@ connectionwithDB(process.env.MONGODB_URL).then(()=>{
 // iniallization of socket.io
 const io = new Server(server,{
     cors:{
-    origin:"*",
+    origin:"http://localhost:5173",
      methods: ["GET", "POST"],
     credentials:true
     }
     
 })
 io.on("connection",(socket)=>{
-    console.log("user is connected",socket.id)
      socket.on("disconnect", () => {
-    console.log("❌ User disconnected:", socket.id);
   });
    socket.on("sendmessage-to-seller",(data)=>{
         io.emit("recive-this-message-seller",data)

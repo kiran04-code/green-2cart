@@ -13,7 +13,7 @@ export const useAppContext = () => {
 }
 const AppContextProvider = ({ children }) => {
     
-const socket =  io("http://localhost:6003")
+const socket =  io("http://localhost:6005")
 
 useEffect(() => {
     const socketioConnection = () => {
@@ -64,6 +64,7 @@ useEffect(() => {
     const handleGoogleLogin = async (body) => {
         try {
             const { data } = await axios.post("/api/GoogleLogin", body, { withCredentials: true })
+            console.log(body)
             if (data.success) {
                 setUser(data.userData)
                 toast.success(data.message)

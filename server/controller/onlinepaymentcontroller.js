@@ -3,9 +3,10 @@ import crypto from "crypto"
 import Order from "../model/ordersmode.js";
 import Product from "../model/product.js";
 export const handleonlinepayment = async (req, res) => {
+  const {amount} = req.body
   try {
     const options = {
-      amount: 50000, // amount in paise = INR 500
+      amount: Number(amount*100), // amount in paise = INR 500
       currency: "INR",
     };
     const order = await instance.orders.create(options);
@@ -50,15 +51,20 @@ for (const item of items) {
 // Add 2% additional charge
 amount += Math.floor(amount * 2 / 100);
 
-const orders =  await Order.create({
+const ordrs  = await Order.create({
   userId,
   items,
   address,
   amount,
   paymentType: "Online"
 });
-console.log(orders)
-    // res.redirect(`http://localhost:5174/My-orders?reference=orderId${razorpay_order_id}`);
+
+return res.json({
+  success:true,
+   message: "Payment Successfull!",
+
+})
+
   } else {
     res.status(400).json({
       success: false,
