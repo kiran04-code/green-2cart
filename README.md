@@ -16,16 +16,16 @@
 
 ---
 
-## 💳 Online Payment with Stripe
+## 💳 Online Payment with Razorpay
 
-GreenCart integrates **Stripe Checkout** to allow users to securely pay online.
+GreenCart integrates **Razorpay Checkout** to allow users to securely pay online.
 
 ### How it works:
 
 1. Users add items to their cart and proceed to checkout.  
-2. Stripe Checkout redirects to a secure payment page.  
+2. Razorpay Checkout redirects to a secure payment page.  
 3. On success, a confirmation is shown and the order is saved.  
-4. Stripe manages all sensitive data securely.
+4. Razorpay manages all sensitive data securely.
 
 ---
 
