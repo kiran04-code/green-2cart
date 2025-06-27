@@ -38,7 +38,7 @@ e.preventDefault()
     naviagte("/cart")
   }
   else{
-    toast.error(error.message)
+    toast.error(data.message)
   }
  } catch (error) {
   console.log(error)
